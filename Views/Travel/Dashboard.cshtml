@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+<body>
+    <nav>
+    <ul class="nav nav-tabs">
+      <li role="presentation">
+        <a href="/logout">Logout</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="container">
+  <h1>Hello @ViewBag.User_one.first_name</h1>
+  <a href="/new"><button type="button" class="btn pull-right">Add Travel Plan</button></a>
+  <br><br><br>
+  <h2>Your Trip schedules</h2>
+  <table class='table'>
+    <thead>
+      <th>Destination</th>
+      <th>Travel StartDate</th>
+      <th>Travel EndDate</th>
+      <th>Plan</th>
+    </thead>
+    <tbody>
+        @{
+        foreach(var All in ViewBag.User_one_trips){
+        <tr>
+            <td><a href="/destination/@All.id">@All.destination</a></td>
+            <td>@All.travelstart.ToString("MM-dd-yy")</td>
+            <td> @All.travelend.ToString("MM-dd-yy") </td>
+            <td> @All.plan</td>
+        </tr>
+        }
+    }
+  </tbody>
+  </table>
+  <h2>Other Users Travel plans</h2>
+  <table class='table'>
+    <thead>
+      <th>Name</th>
+      <th>Destination</th>
+      <th>Travel StartDate</th>
+      <th>Travel EndDate</th>
+      <th>Plan</th>
+       <th>Do you want to join</th>
+    </thead>
+    <tbody>
+        @{
+        foreach(var others in ViewBag.User_Except_trips){
+        <tr>
+            <td>@others.first_name</td>
+            <td><a href="/destination/@others.id">@others.destination</a></td>
+            <td>@others.travelstart.ToString("MM-dd-yy")</td>
+            <td> @others.travelend.ToString("MM-dd-yy") </td>
+            <td> @others.plan</td>
+            <td><a href="/join/@others.id" onclick="return confirm('Are you sure you want to join this trip');">join</a></td>
+        </tr>
+        }
+    }
+  </tbody>
+  </table>
+</div>
+</body>
+</html>

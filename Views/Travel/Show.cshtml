@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+<body>
+    <nav>
+    <ul class="nav nav-tabs">
+    <li role="presentation">
+        <a href="/dashboard">Home</a>
+      </li>
+      <li role="presentation">
+        <a href="/logout">Logout</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="container">
+      <p>
+  		<h4>@ViewBag.Trip_Info.destination</h4>
+	  	<p>Planned By: @ViewBag.Trip_Info.first_name</p>
+	  	<p>Description: @ViewBag.Trip_Info.plan</p>
+	  	<p>Travel Date From: @ViewBag.Trip_Info.travelstart.ToString("MM-dddd-yy")</p>
+	  	<p>Travel Date To: @ViewBag.Trip_Info.travelend.ToString("MM-dd-yy")</p>
+	</p><br><br>
+  	<h1>Other Users joining the trip</h1>
+      @{
+        foreach(var All in ViewBag.Other_Users){
+            <p>@All.first_name</p>
+        }
+      }
+  </div>  
